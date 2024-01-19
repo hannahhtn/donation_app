@@ -66,10 +66,10 @@ const Form = ({ handleClick }) => {
           <FormControl>
             <FormLabel htmlFor="amount">Amount</FormLabel>
             <Input
+              type="number"
               variant="filled"
               id="amount"
               name="amount"
-              type="text"
               onChange={formik.handleChange}
               value={formik.values.amount}
               isRequired
