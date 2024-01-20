@@ -10,6 +10,9 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
+import { useState } from "react";
+
+
 
 // create unique id key for each donor
 // using curent date time value converted to base-36
@@ -18,6 +21,7 @@ function getUID() {
 }
 
 const Form = ({ handleClick }) => {
+  const [indx, setIndx] = useState(0);
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -25,11 +29,13 @@ const Form = ({ handleClick }) => {
       amount: "",
       date: "",
       id: "",
+      index: indx,
     },
     onSubmit: (values) => {
       values.id = getUID();
       console.log(values.id);
       handleClick(values);
+      setIndx(indx + 1);
     },
   });
   return (

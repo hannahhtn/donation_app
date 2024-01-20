@@ -5,14 +5,11 @@ import {
   useReactTable,
   flexRender,
   getCoreRowModel,
-  getSortedRowModel
+  getSortedRowModel,
 } from "@tanstack/react-table";
 import { useState } from "react";
 
-const TableData = ({
-  data,
-  columns
-}) => {
+const TableData = ({ data, columns, setdonorsList }) => {
   const [sorting, setSorting] = useState([]);
   const table = useReactTable({
     columns,
@@ -21,8 +18,8 @@ const TableData = ({
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
     state: {
-      sorting
-    }
+      sorting,
+    },
   });
 
   return (
@@ -35,7 +32,7 @@ const TableData = ({
               return (
                 <Th
                   key={header.id}
-                  onClick={header.column.getToggleSortingHandler()}
+                  onClick={(header.column.columnDef.header !== "Delete")?header.column.getToggleSortingHandler():null}
                   isNumeric={meta?.isNumeric}
                 >
                   {flexRender(
@@ -74,5 +71,5 @@ const TableData = ({
       </Tbody>
     </Table>
   );
-}
+};
 export default TableData;

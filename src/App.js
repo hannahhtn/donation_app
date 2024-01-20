@@ -6,6 +6,8 @@ import Form from "./Form";
 import TableData from "./Table";
 import { useState } from "react";
 import { createColumnHelper } from "@tanstack/react-table";
+import { DeleteIcon } from "@chakra-ui/icons";
+
 
 function App() {
   const [donorsList, setdonorsList] = useState([]);
@@ -31,6 +33,18 @@ function App() {
     columnHelper.accessor("date", {
       cell: (info) => info.getValue(),
       header: "Date",
+    }),
+    columnHelper.accessor("icon", {
+      cell: (info) => (
+        <DeleteIcon
+          onClick={() => {
+            let temp = [...donorsList];
+            temp.splice(info.row.index, 1);
+            setdonorsList(temp);
+          }}
+        ></DeleteIcon>
+      ),
+      header: "Delete",
     }),
   ];
 
